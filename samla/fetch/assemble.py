@@ -46,10 +46,7 @@ def get_and_parse_tables(
     rows = fetch_rows(source_conn=conn)
     groups = split_by_table(rows=rows)
 
-    pool_args = [
-        (source_system, hostname, group_rows)
-        for _, _, group_rows in groups
-    ]
+    pool_args = [(source_system, hostname, group_rows) for _, _, group_rows in groups]
 
     with Pool() as pool:
         tables = pool.map(_parse_table_rows, pool_args)

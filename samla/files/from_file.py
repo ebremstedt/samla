@@ -4,8 +4,20 @@ from samla.table.column import SourceColumn, TableType
 from samla.table.table import Table
 
 _FIELDNAMES = [
-    "source_system", "server_name", "catalog", "schema", "table", "table_type",
-    "column", "data_type", "length", "nullable", "scale", "precision", "is_primary_key", "source_type",
+    "source_system",
+    "server_name",
+    "catalog",
+    "schema",
+    "table",
+    "table_type",
+    "column",
+    "data_type",
+    "length",
+    "nullable",
+    "scale",
+    "precision",
+    "is_primary_key",
+    "source_type",
 ]
 
 
@@ -15,29 +27,38 @@ def save_tables_to_file(tables: list[Table], path: Path) -> None:
         writer.writeheader()
         for t in tables:
             for col in t.columns:
-                writer.writerow({
-                    "source_system": t.source_system,
-                    "server_name": t.server_name,
-                    "catalog": t.catalog,
-                    "schema": t.schema,
-                    "table": t.table,
-                    "table_type": t.table_type.value,
-                    "column": col.column,
-                    "data_type": col.data_type,
-                    "length": col.length,
-                    "nullable": col.nullable,
-                    "scale": col.scale,
-                    "precision": col.precision,
-                    "is_primary_key": col.is_primary_key,
-                    "source_type": col.source_type.value,
-                })
+                writer.writerow(
+                    {
+                        "source_system": t.source_system,
+                        "server_name": t.server_name,
+                        "catalog": t.catalog,
+                        "schema": t.schema,
+                        "table": t.table,
+                        "table_type": t.table_type.value,
+                        "column": col.column,
+                        "data_type": col.data_type,
+                        "length": col.length,
+                        "nullable": col.nullable,
+                        "scale": col.scale,
+                        "precision": col.precision,
+                        "is_primary_key": col.is_primary_key,
+                        "source_type": col.source_type.value,
+                    }
+                )
 
 
 def load_tables_from_file(path: Path) -> list[Table]:
     buckets: dict[tuple, dict] = {}
     with path.open(newline="") as f:
         for row in csv.DictReader(f):
-            key = (row["source_system"], row["server_name"], row["catalog"], row["schema"], row["table"], row["table_type"])
+            key = (
+                row["source_system"],
+                row["server_name"],
+                row["catalog"],
+                row["schema"],
+                row["table"],
+                row["table_type"],
+            )
             if key not in buckets:
                 buckets[key] = {"meta": row, "columns": []}
             buckets[key]["columns"].append(row)
