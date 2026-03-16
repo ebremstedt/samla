@@ -47,7 +47,7 @@ from samla import save_tables_to_file
 save_tables_to_file(tables=tables, path=Path("tables.csv"))
 ```
 
-Or from the command line:
+Or from the command line
 
 ```bash
 python main.py                        # fetch from database
