@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "samla"
+version = "0.1.0"
+description = "Fetch and parse MSSQL schema metadata into structured Table objects"
+requires-python = ">=3.11.0"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "Erik Bremstedt", email = "erik@bremstedtanalytics.se" }]
+dependencies = [
+    "pyodbc>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/ebremstedt/samla"

@@ -1,0 +1,38 @@
+from samla.table.column import SourceColumn, TableType
+from samla.table.table import Table
+
+
+def make_fixtures() -> list[Table]:
+    return [
+        Table(
+            source_system="test",
+            server_name="localhost",
+            catalog="AdventureWorks",
+            schema="Sales",
+            table="SalesOrderHeader",
+            table_type=TableType.TABLE,
+            columns=[
+                SourceColumn(column="SalesOrderID", data_type="int", length=None, nullable=False, scale=None, precision=None, is_primary_key=True, source_type=TableType.TABLE),
+                SourceColumn(column="OrderDate", data_type="datetime", length=None, nullable=False, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="CustomerID", data_type="int", length=None, nullable=False, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="TotalDue", data_type="decimal", length=None, nullable=False, scale=4, precision=19, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="Comment", data_type="nvarchar", length="128", nullable=True, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+            ],
+        ),
+        Table(
+            source_system="test",
+            server_name="localhost",
+            catalog="AdventureWorks",
+            schema="Person",
+            table="Customer",
+            table_type=TableType.TABLE,
+            columns=[
+                SourceColumn(column="CustomerID", data_type="int", length=None, nullable=False, scale=None, precision=None, is_primary_key=True, source_type=TableType.TABLE),
+                SourceColumn(column="FirstName", data_type="nvarchar", length="50", nullable=False, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="LastName", data_type="nvarchar", length="50", nullable=False, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="EmailAddress", data_type="nvarchar", length="256", nullable=True, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="Phone", data_type="nvarchar", length="25", nullable=True, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+                SourceColumn(column="ModifiedDate", data_type="datetime", length=None, nullable=False, scale=None, precision=None, is_primary_key=False, source_type=TableType.TABLE),
+            ],
+        ),
+    ]
